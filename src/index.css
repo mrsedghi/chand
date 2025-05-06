@@ -1,8 +1,13 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
+@font-face {
+  font-family: iranyekanBakh;
+  src: url(/fonts/Bakh-new/Yekan-Bakh-FaNum-04-Regular.ttf);
+}
+
 * {
-  font-family: yekan !important;
+  font-family: iranyekanBakh !important;
 }
 
 @plugin "daisyui/theme" {
@@ -38,4 +43,27 @@
   --border: 1px;
   --depth: 1;
   --noise: 0;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-repeat: repeat no-repeat;
+  background-position: 0 bottom;
+  transform-origin: center bottom;
+}
+
+.wave1 {
+  background-size: 50% 80px;
+}
+
+.wave2 {
+  background-size: 50% 100px;
+}
+
+.wave3 {
+  background-size: 50% 120px;
 }

@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import Footer from "./Components/Footer";
 
 function App() {
   const Key = "FreeFusNYvmUj8BOKoqzaZSlwYnQONdS";
@@ -11,7 +12,6 @@ function App() {
   const [searchTerm, setSearchTerm] = useState("");
   const [activeTab, setActiveTab] = useState("all");
   const [darkMode, setDarkMode] = useState(false);
-  const [showIntro, setShowIntro] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,7 +22,6 @@ function App() {
         setError(err.message);
       } finally {
         setLoading(false);
-        setTimeout(() => setShowIntro(false), 2000); // Hide intro after 2 seconds
       }
     };
     fetchData();
@@ -169,20 +168,6 @@ function App() {
     );
   };
 
-  // Intro animation
-  if (showIntro) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-primary to-secondary">
-        <div className="text-center text-primary-content animate-pulse">
-          <Icon icon="clarity:bank-solid" className="text-8xl mb-4" />
-          <h1 className="text-4xl font-bold">ردیاب بازار مالی</h1>
-          <p className="mt-2 text-xl">قیمت لحظه‌ای طلا، ارز و رمزارز</p>
-          <span className="loading loading-dots loading-lg mt-6"></span>
-        </div>
-      </div>
-    );
-  }
-
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-base-200">
@@ -191,7 +176,7 @@ function App() {
           <p className="mt-4 text-lg font-medium">
             در حال دریافت اطلاعات بازار...
           </p>
-          <p className="text-sm opacity-70">لطفاً چند لحظه صبر کنید</p>
+          <p className="text-sm opacity-70">لطفاً چند!؟ لحظه صبر کنید</p>
         </div>
       </div>
     );
@@ -273,7 +258,7 @@ function App() {
             </div>
             <div className="bg-base-300 rounded-xl p-2">
               <h1 className=" text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                چند؟
+                چند!؟
               </h1>
             </div>
           </div>
@@ -435,7 +420,7 @@ function App() {
                           </span>
                         )}
                       </span>
-                      <span className="text-sm opacity-80 badge badge-ghost">
+                      <span className="text-sm font-bold opacity-80 badge badge-soft badge-accent">
                         {item.unit}
                       </span>
                     </div>
@@ -473,7 +458,7 @@ function App() {
                   </div>
 
                   <div className="mt-4 flex justify-between items-center text-xs">
-                    <div className="badge badge-primary badge-outline">
+                    <div className="badge badge-primary badge-soft">
                       {item.type === "gold"
                         ? "طلا"
                         : item.type === "currency"
@@ -481,12 +466,12 @@ function App() {
                         : "کریپتو"}
                     </div>
                     <div className="flex gap-1">
-                      <div className="badge badge-ghost">
+                      <div className="badge badge-soft">
                         <Icon icon="ph:calendar" className="mr-1" />
                         {item.date}
                       </div>
                       {item.time && (
-                        <div className="badge badge-ghost">
+                        <div className="badge badge-soft">
                           <Icon icon="ph:clock" className="mr-1" />
                           {item.time}
                         </div>
@@ -521,6 +506,8 @@ function App() {
               </button>
             </div>
           )}
+
+          <Footer />
         </div>
       </div>
     </div>

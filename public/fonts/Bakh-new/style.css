@@ -1,0 +1,45 @@
+@font-face{
+  font-display:swap;
+  font-family:iranyekanBakh;
+  font-weight:400;
+  src:url(Yekan-Bakh-FaNum-04-Regular.eot);
+  src:url(Yekan-Bakh-FaNum-04-Regular.eot?#iefix) format("embedded-opentype"),
+  url(Yekan-Bakh-FaNum-04-Regular.woff) format("woff"),
+  url(Yekan-Bakh-FaNum-04-Regular.ttf) format("truetype")
+}
+@font-face{
+  font-display:swap;
+  font-family:iranyekanBakh;
+  font-weight:500;
+  src:url(Yekan-Bakh-FaNum-05-Medium.eot);
+  src:url(Yekan-Bakh-FaNum-05-Medium.eot?#iefix) format("embedded-opentype"),
+  url(Yekan-Bakh-FaNum-05-Medium.woff) format("woff"),
+  url(Yekan-Bakh-FaNum-05-Medium.ttf) format("truetype")
+}
+@font-face{
+  font-display:swap;
+  font-family:iranyekanBakh;
+  font-weight:600;
+  src:url(Yekan-Bakh-FaNum-06-Bold.eot);
+  src:url(Yekan-Bakh-FaNum-06-Bold.eot?#iefix) format("embedded-opentype"),
+  url(Yekan-Bakh-FaNum-06-Bold.woff) format("woff"),
+  url(Yekan-Bakh-FaNum-06-Bold.ttf) format("truetype")
+}
+@font-face{
+  font-display:swap;
+  font-family:iranyekanBakh;
+  font-weight:700;
+  src:url(Yekan-Bakh-FaNum-07-Heavy.eot);
+  src:url(Yekan-Bakh-FaNum-07-Heavy.eot?#iefix) format("embedded-opentype"),
+  url(Yekan-Bakh-FaNum-07-Heavy.woff) format("woff"),
+  url(Yekan-Bakh-FaNum-07-Heavy.ttf) format("truetype")
+}
+@font-face{
+  font-display:swap;
+  font-family:iranyekanBakh;
+  font-weight:800;
+  src:url(Yekan-Bakh-FaNum-08-Fat.eot);
+  src:url(Yekan-Bakh-FaNum-08-Fat.eot?#iefix) format("embedded-opentype"),
+  url(Yekan-Bakh-FaNum-08-Fat.woff) format("woff"),
+  url(Yekan-Bakh-FaNum-08-Fat.ttf) format("truetype")
+}
