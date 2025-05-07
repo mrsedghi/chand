@@ -15,6 +15,8 @@ export default defineConfig({
         short_name: "Chand!?",
         description: "ردیاب بازارهای مالی - Financial Market Tracker",
         theme_color: "#605DFF",
+        dir: "rtl",
+        lang: "fa-IR",
         icons: [
           {
             src: "icons/icon-48x48.png",
@@ -70,6 +72,19 @@ export default defineConfig({
       },
       workbox: {
         globPatterns: ["**/*.{js,css,html,ico,png,svg,json}"],
+        runtimeCaching: [
+          {
+            urlPattern: /^https:\/\/brsapi\.ir\/Api\/Market/,
+            handler: "StaleWhileRevalidate",
+            options: {
+              cacheName: "api-cache",
+              expiration: {
+                maxEntries: 50,
+                maxAgeSeconds: 24 * 60 * 60, // 1 day
+              },
+            },
+          },
+        ],
       },
     }),
   ],

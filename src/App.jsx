@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Footer from "./Components/Footer";
 import { registerSW } from "./sw";
+import PWAInstallPrompt from "./Components/PWAInstallPrompt";
 
 registerSW();
 function App() {
@@ -469,6 +470,7 @@ function App() {
           <Footer />
         </div>
       </div>
+      <PWAInstallPrompt />
     </div>
   );
 }
