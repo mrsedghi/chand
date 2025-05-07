@@ -5,7 +5,7 @@ import Footer from "./Components/Footer";
 import { registerSW } from "./sw";
 import PWAInstallPrompt from "./Components/PWAInstallPrompt";
 import SeoWrapper from "./seo/SeoWrapper";
-
+import shib from "../public/icons/shib.png";
 registerSW();
 function App() {
   const Key = "FreeFusNYvmUj8BOKoqzaZSlwYnQONdS";
@@ -366,10 +366,14 @@ function App() {
                         className=" p-1
                       bg-base-300 w-12 h-fit rounded-full flex items-center justify-center gap-5"
                       >
-                        <Icon
-                          icon={getItemIcon(item)}
-                          className="text-3xl w-full h-full"
-                        />
+                        {item.symbol == "SHIB" ? (
+                          <img src={shib} className="w-full h-full" />
+                        ) : (
+                          <Icon
+                            icon={getItemIcon(item)}
+                            className="text-3xl w-full h-full"
+                          />
+                        )}
                       </div>
 
                       <div className="mr-4">
