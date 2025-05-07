@@ -1,4 +1,3 @@
-// Check if app is running as PWA
 export const isRunningAsPWA = () => {
   return (
     window.matchMedia("(display-mode: standalone)").matches ||
@@ -7,14 +6,12 @@ export const isRunningAsPWA = () => {
   );
 };
 
-// Check if user is on mobile device
 export const isMobileDevice = () => {
   return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
 };
 
-// Check if iOS (needs special handling)
 export const isIOS = () => {
   return (
     /iPad|iPhone|iPod/.test(navigator.userAgent) ||

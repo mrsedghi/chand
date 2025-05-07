@@ -1,21 +1,43 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
+import { isRunningAsPWA, isMobileDevice, isIOS } from "../utils/pwa";
 
-export default function PWAInstallPrompt() {
-  const [deferredPrompt, setDeferredPrompt] = useState();
+const PWAInstallPrompt = () => {
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isIOSDevice, setIsIOSDevice] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
 
   useEffect(() => {
-    const handler = (e) => {
+    if (isRunningAsPWA()) return;
+
+    setIsIOSDevice(isIOS());
+
+    const handleBeforeInstallPrompt = (e) => {
       e.preventDefault();
       setDeferredPrompt(e);
-      setIsVisible(true);
+
+      // Check if user previously dismissed the prompt
+      const dismissed = localStorage.getItem("pwaPromptDismissed");
+      if (!dismissed) {
+        setIsVisible(true);
+      }
     };
 
-    window.addEventListener("beforeinstallprompt", handler);
+    if (!isIOS()) {
+      window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+    } else if (isMobileDevice()) {
+      const dismissed = localStorage.getItem("pwaPromptDismissed");
+      if (!dismissed) {
+        setIsVisible(true);
+      }
+    }
 
     return () => {
-      window.removeEventListener("beforeinstallprompt", handler);
+      window.removeEventListener(
+        "beforeinstallprompt",
+        handleBeforeInstallPrompt
+      );
     };
   }, []);
 
@@ -27,34 +49,115 @@ export default function PWAInstallPrompt() {
         console.log("User accepted the install prompt");
       }
       setIsVisible(false);
+      localStorage.setItem("pwaPromptDismissed", "true");
     }
   };
 
   const handleDismiss = () => {
     setIsVisible(false);
-    // You can store in localStorage that user dismissed the prompt
     localStorage.setItem("pwaPromptDismissed", "true");
+  };
+
+  const toggleInstructions = () => {
+    setShowInstructions(!showInstructions);
   };
 
   if (!isVisible) return null;
 
   return (
-    <div className="fixed bottom-4 left-4 right-4 bg-primary text-primary-content p-4 rounded-lg shadow-xl z-50 max-w-md mx-auto">
-      <div className="flex items-center justify-between gap-3">
-        <Icon icon="mdi:cellphone-arrow-down" className="text-2xl" />
-        <div className="flex-1">
-          <h3 className="font-bold">نصب اپلیکیشن چند؟</h3>
-          <p className="text-sm">برای تجربه بهتر، اپلیکیشن را نصب کنید</p>
+    <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm z-50 flex items-end justify-center p-4 sm:items-center sm:p-6">
+      <div className="bg-base-100 rounded-2xl shadow-xl w-full max-w-md transform transition-all duration-300 ease-in-out animate-fade-in-up">
+        <div className="p-6">
+          <div className="flex items-start gap-4">
+            <div className="bg-primary/10 p-3 rounded-full">
+              <Icon
+                icon={isIOSDevice ? "mdi:apple" : "mdi:cellphone-arrow-down"}
+                className="text-3xl text-primary"
+              />
+            </div>
+
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+                {isIOSDevice ? "نصب اپلیکیشن چند؟" : "Install Chand App"}
+              </h3>
+
+              <p className="mt-1 text-gray-600 dark:text-gray-300">
+                {isIOSDevice
+                  ? "برای دسترسی سریع به اپلیکیشن روی دستگاه خانگی"
+                  : "For better experience, install the app on your device"}
+              </p>
+
+              {isIOSDevice && showInstructions && (
+                <div className="mt-3 bg-base-200 rounded-lg p-3 animate-fade-in">
+                  <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 dark:text-gray-300">
+                    <li>روی دکمه Share (اشتراک گذاری) در مرورگر کلیک کنید</li>
+                    <li>گزینه "Add to Home Screen" را انتخاب کنید</li>
+                    <li>روی "Add" در بالا سمت راست کلیک کنید</li>
+                  </ol>
+                  <div className="mt-2 flex justify-center">
+                    <Icon
+                      icon="mdi:arrow-down"
+                      className="text-2xl text-primary animate-bounce"
+                    />
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <button
+              onClick={handleDismiss}
+              className="btn btn-ghost btn-sm btn-circle"
+            >
+              <Icon icon="mdi:close" className="text-lg" />
+            </button>
+          </div>
+
+          <div className="mt-6 flex flex-col sm:flex-row gap-3">
+            {isIOSDevice ? (
+              <>
+                <button
+                  onClick={toggleInstructions}
+                  className="btn btn-primary flex-1 gap-2"
+                >
+                  <Icon icon="mdi:information" />
+                  {showInstructions ? "بستن راهنما" : "نمایش راهنما"}
+                </button>
+                <button
+                  onClick={handleDismiss}
+                  className="btn btn-outline flex-1"
+                >
+                  بعداً
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={handleInstall}
+                  className="btn btn-primary flex-1 gap-2"
+                >
+                  <Icon icon="mdi:download" />
+                  نصب اپلیکیشن
+                </button>
+                <button
+                  onClick={handleDismiss}
+                  className="btn btn-outline flex-1"
+                >
+                  شاید بعداً
+                </button>
+              </>
+            )}
+          </div>
         </div>
-        <div className="flex gap-2">
-          <button onClick={handleInstall} className="btn btn-sm btn-success">
-            نصب
-          </button>
-          <button onClick={handleDismiss} className="btn btn-sm btn-ghost">
-            بعداً
-          </button>
-        </div>
+
+        {!isIOSDevice && (
+          <div className="bg-base-200 px-4 py-3 rounded-b-2xl text-center text-sm text-gray-500 dark:text-gray-400">
+            <Icon icon="mdi:cloud-download" className="inline mr-1" />
+            حجم نصب: کمتر از ۱ مگابایت
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default PWAInstallPrompt;
