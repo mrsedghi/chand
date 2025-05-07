@@ -180,7 +180,7 @@ function App() {
           <p className="mt-4 text-lg font-medium">
             در حال دریافت اطلاعات بازار...
           </p>
-          <p className="text-sm opacity-70">لطفاً چند!؟ لحظه صبر کنید</p>
+          <p className="text-sm opacity-70">لطفاً چند لحظه صبر کنید</p>
         </div>
       </div>
     );
@@ -227,8 +227,12 @@ function App() {
           <div className="navbar backdrop-blur-md bg-base-100/80 text-base-content sticky top-0 z-50 shadow-lg">
             <div className="navbar-start">
               <div className="bg-base-300 rounded-xl p-2">
-                <h1 className=" text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                  چند!؟
+                <h1
+                  className={`text-2xl font-bold ${
+                    darkMode ? "text-gray-300" : "text-gray-800"
+                  }`}
+                >
+                  chand!?
                 </h1>
               </div>
             </div>
