@@ -21,15 +21,9 @@ const Footer = () => {
           animate={{ scale: [1, 1.2, 1] }}
           transition={{ duration: 1.5, repeat: Infinity }}
         >
-          <Icon icon="mdi:heart" />
+          <Icon icon="mdi:heart" className="text-red-600" />
         </motion.span>
-        <span>و</span>
-        <motion.span
-          animate={{ rotate: [0, 15, 0, -15, 0] }}
-          transition={{ duration: 3, repeat: Infinity }}
-        >
-          <Icon icon="mdi:coffee" />
-        </motion.span>
+
         <span>توسط</span>
         <a
           href="https://mrsedghi.ir"

@@ -2,7 +2,9 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import Footer from "./Components/Footer";
+import { registerSW } from "./sw";
 
+registerSW();
 function App() {
   const Key = "FreeFusNYvmUj8BOKoqzaZSlwYnQONdS";
   const URL = `https://brsapi.ir/Api/Market/Gold_Currency.php?key=${Key}`;
@@ -213,49 +215,6 @@ function App() {
         {/* Header with glass effect */}
         <div className="navbar backdrop-blur-md bg-base-100/80 text-base-content sticky top-0 z-50 shadow-lg">
           <div className="navbar-start">
-            <div className="dropdown">
-              <label tabIndex={0} className="btn btn-ghost lg:hidden">
-                <Icon icon="heroicons:bars-3" className="h-5 w-5" />
-              </label>
-              <ul
-                tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-[51]"
-              >
-                <li>
-                  <a onClick={() => setActiveTab("all")}>
-                    <Icon icon="mdi:view-dashboard" className="text-xl" />
-                    همه بازارها
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => setActiveTab("gold")}>
-                    <Icon
-                      icon="game-icons:gold-bar"
-                      className="text-xl text-yellow-500"
-                    />
-                    طلا و سکه
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => setActiveTab("currency")}>
-                    <Icon
-                      icon="heroicons:currency-dollar-20-solid"
-                      className="text-xl text-green-500"
-                    />
-                    ارز خارجی
-                  </a>
-                </li>
-                <li>
-                  <a onClick={() => setActiveTab("crypto")}>
-                    <Icon
-                      icon="ph:coin-fill"
-                      className="text-xl text-blue-500"
-                    />
-                    ارز دیجیتال
-                  </a>
-                </li>
-              </ul>
-            </div>
             <div className="bg-base-300 rounded-xl p-2">
               <h1 className=" text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                 چند!؟
@@ -338,8 +297,8 @@ function App() {
           {/* Category Filter Pills - Mobile Only */}
           <div className="flex overflow-x-auto gap-2 py-3 md:hidden">
             <button
-              className={`btn btn-sm ${
-                activeTab === "all" ? "btn-primary" : "btn-outline"
+              className={`btn btn-sm  ${
+                activeTab === "all" ? "btn-primary" : "btn-ghost btn-soft"
               }`}
               onClick={() => setActiveTab("all")}
             >
@@ -348,7 +307,7 @@ function App() {
             </button>
             <button
               className={`btn btn-sm ${
-                activeTab === "gold" ? "btn-primary" : "btn-outline"
+                activeTab === "gold" ? "btn-primary" : "btn-ghost btn-soft"
               }`}
               onClick={() => setActiveTab("gold")}
             >
@@ -357,7 +316,7 @@ function App() {
             </button>
             <button
               className={`btn btn-sm ${
-                activeTab === "currency" ? "btn-primary" : "btn-outline"
+                activeTab === "currency" ? "btn-primary" : "btn-ghost btn-soft"
               }`}
               onClick={() => setActiveTab("currency")}
             >
@@ -369,7 +328,7 @@ function App() {
             </button>
             <button
               className={`btn btn-sm ${
-                activeTab === "crypto" ? "btn-primary" : "btn-outline"
+                activeTab === "crypto" ? "btn-primary" : "btn-ghost btn-soft"
               }`}
               onClick={() => setActiveTab("crypto")}
             >
