@@ -103,33 +103,33 @@ function App() {
     // Currency icons - detailed flag icons
     if (item.type === "currency") {
       const currencyIcons = {
-        USD: "flag:us-4x3",
-        EUR: "flag:eu-4x3",
-        GBP: "flag:gb-4x3",
-        JPY: "flag:jp-4x3",
-        CAD: "flag:ca-4x3",
-        AUD: "flag:au-4x3",
-        KWD: "flag:kw-4x3",
-        CHF: "flag:ch-4x3",
-        PKR: "flag:pk-4x3",
-        IQD: "flag:iq-4x3",
-        SYP: "flag:sy-4x3",
-        SEK: "flag:se-4x3",
-        QAR: "flag:qa-4x3",
-        OMR: "flag:om-4x3",
-        BHD: "flag:bh-4x3",
-        AFN: "flag:af-4x3",
-        MYR: "flag:my-4x3",
-        THB: "flag:th-4x3",
-        AZN: "flag:az-4x3",
-        AMD: "flag:am-4x3",
-        GEL: "flag:ge-4x3",
-        CNY: "flag:cn-4x3",
-        AED: "flag:ae-4x3",
-        SAR: "flag:sa-4x3",
-        TRY: "flag:tr-4x3",
-        RUB: "flag:ru-4x3",
-        INR: "flag:in-4x3",
+        USD: "circle-flags:us",
+        EUR: "circle-flags:eu",
+        GBP: "circle-flags:gb",
+        JPY: "circle-flags:jp",
+        CAD: "circle-flags:ca",
+        AUD: "circle-flags:au",
+        KWD: "circle-flags:kw",
+        CHF: "circle-flags:ch",
+        PKR: "circle-flags:pk",
+        IQD: "circle-flags:iq",
+        SYP: "circle-flags:sy",
+        SEK: "circle-flags:se",
+        QAR: "circle-flags:qa",
+        OMR: "circle-flags:om",
+        BHD: "circle-flags:bh",
+        AFN: "circle-flags:af",
+        MYR: "circle-flags:my",
+        THB: "circle-flags:th",
+        AZN: "circle-flags:az",
+        AMD: "circle-flags:am",
+        GEL: "circle-flags:ge",
+        CNY: "circle-flags:cn",
+        AED: "circle-flags:ae",
+        SAR: "circle-flags:sa",
+        TRY: "circle-flags:tr",
+        RUB: "circle-flags:ru",
+        INR: "circle-flags:in",
         USDT_IRT: "cryptocurrency-color:usdt",
       };
       return currencyIcons[item.symbol] || "heroicons:currency-dollar-20-solid";
@@ -364,7 +364,7 @@ function App() {
                     <div className="flex items-center gap-4">
                       <div
                         className=" p-1
-                      bg-base-300 w-12 h-fit rounded flex items-center justify-center gap-5"
+                      bg-base-300 w-12 h-fit rounded-full flex items-center justify-center gap-5"
                       >
                         <Icon
                           icon={getItemIcon(item)}
