@@ -364,9 +364,12 @@ function App() {
                     <div className="flex items-center gap-4">
                       <div
                         className=" p-1
-                      bg-base-300 rounded flex items-center justify-center gap-5"
+                      bg-base-300 w-12 h-fit rounded flex items-center justify-center gap-5"
                       >
-                        <Icon icon={getItemIcon(item)} className="text-3xl" />
+                        <Icon
+                          icon={getItemIcon(item)}
+                          className="text-3xl w-full h-full"
+                        />
                       </div>
 
                       <div className="mr-4">
