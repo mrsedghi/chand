@@ -4,6 +4,7 @@ import { Icon } from "@iconify/react";
 import Footer from "./Components/Footer";
 import { registerSW } from "./sw";
 import PWAInstallPrompt from "./Components/PWAInstallPrompt";
+import SeoWrapper from "./seo/SeoWrapper";
 
 registerSW();
 function App() {
@@ -211,267 +212,282 @@ function App() {
   }
 
   return (
-    <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
-      <div className="min-h-screen bg-base-200 text-base-content">
-        {/* Header with glass effect */}
-        <div className="navbar backdrop-blur-md bg-base-100/80 text-base-content sticky top-0 z-50 shadow-lg">
-          <div className="navbar-start">
-            <div className="bg-base-300 rounded-xl p-2">
-              <h1 className=" text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                چند!؟
-              </h1>
+    <SeoWrapper
+      seoProps={{
+        title: "چند؟ | ردیاب لحظه‌ای بازارهای مالی",
+        description:
+          "پیگیری لحظه‌ای قیمت طلا، سکه، ارز و ارزهای دیجیتال به زبان فارسی",
+        keywords: "قیمت طلا, قیمت سکه, قیمت دلار, نرخ ارز, بیت کوین, تتر",
+        canonical: "https://chand-beta.vercel.app",
+      }}
+    >
+      <div className={`min-h-screen ${darkMode ? "dark" : ""}`}>
+        <div className="min-h-screen bg-base-200 text-base-content">
+          {/* Header with glass effect */}
+          <div className="navbar backdrop-blur-md bg-base-100/80 text-base-content sticky top-0 z-50 shadow-lg">
+            <div className="navbar-start">
+              <div className="bg-base-300 rounded-xl p-2">
+                <h1 className=" text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                  چند!؟
+                </h1>
+              </div>
             </div>
-          </div>
 
-          <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1">
-              <li>
-                <a
-                  onClick={() => setActiveTab("all")}
-                  className={activeTab === "all" ? "bg-base-300/50" : ""}
-                >
-                  <Icon icon="mdi:view-dashboard" className="text-xl" />
-                  همه
-                </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => setActiveTab("gold")}
-                  className={activeTab === "gold" ? "bg-base-300/50" : ""}
-                >
-                  <Icon
-                    icon="game-icons:gold-bar"
-                    className="text-xl text-yellow-500"
-                  />
-                  طلا و سکه
-                </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => setActiveTab("currency")}
-                  className={activeTab === "currency" ? "bg-base-300/50" : ""}
-                >
-                  <Icon
-                    icon="heroicons:currency-dollar-20-solid"
-                    className="text-xl text-green-500"
-                  />
-                  ارز خارجی
-                </a>
-              </li>
-              <li>
-                <a
-                  onClick={() => setActiveTab("crypto")}
-                  className={activeTab === "crypto" ? "bg-base-300/50" : ""}
-                >
-                  <Icon icon="ph:coin-fill" className="text-xl text-blue-500" />
-                  ارز دیجیتال
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          <div className="navbar-end">
-            <div className="form-control mr-2">
-              <input
-                type="text"
-                placeholder="جستجو..."
-                className="input input-bordered input-sm md:w-56 w-24"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+            <div className="navbar-center hidden lg:flex">
+              <ul className="menu menu-horizontal px-1">
+                <li>
+                  <a
+                    onClick={() => setActiveTab("all")}
+                    className={activeTab === "all" ? "bg-base-300/50" : ""}
+                  >
+                    <Icon icon="mdi:view-dashboard" className="text-xl" />
+                    همه
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => setActiveTab("gold")}
+                    className={activeTab === "gold" ? "bg-base-300/50" : ""}
+                  >
+                    <Icon
+                      icon="game-icons:gold-bar"
+                      className="text-xl text-yellow-500"
+                    />
+                    طلا و سکه
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => setActiveTab("currency")}
+                    className={activeTab === "currency" ? "bg-base-300/50" : ""}
+                  >
+                    <Icon
+                      icon="heroicons:currency-dollar-20-solid"
+                      className="text-xl text-green-500"
+                    />
+                    ارز خارجی
+                  </a>
+                </li>
+                <li>
+                  <a
+                    onClick={() => setActiveTab("crypto")}
+                    className={activeTab === "crypto" ? "bg-base-300/50" : ""}
+                  >
+                    <Icon
+                      icon="ph:coin-fill"
+                      className="text-xl text-blue-500"
+                    />
+                    ارز دیجیتال
+                  </a>
+                </li>
+              </ul>
             </div>
-            <button
-              className="btn btn-ghost btn-circle"
-              onClick={toggleDarkMode}
-              title={darkMode ? "حالت روشن" : "حالت تاریک"}
-            >
-              <Icon
-                icon={darkMode ? "ph:sun-fill" : "ph:moon-fill"}
-                className="text-xl"
-              />
-            </button>
-          </div>
-        </div>
 
-        {/* Market Stats Summary */}
-        <div className="container mx-auto px-4 py-5">
-          {/* Category Filter Pills - Mobile Only */}
-          <div className="flex overflow-x-auto gap-2 py-3 md:hidden">
-            <button
-              className={`btn btn-sm  ${
-                activeTab === "all" ? "btn-primary" : "btn-ghost btn-soft"
-              }`}
-              onClick={() => setActiveTab("all")}
-            >
-              <Icon icon="mdi:view-dashboard" />
-              همه
-            </button>
-            <button
-              className={`btn btn-sm ${
-                activeTab === "gold" ? "btn-primary" : "btn-ghost btn-soft"
-              }`}
-              onClick={() => setActiveTab("gold")}
-            >
-              <Icon icon="game-icons:gold-bar" className="text-yellow-500" />
-              طلا و سکه
-            </button>
-            <button
-              className={`btn btn-sm ${
-                activeTab === "currency" ? "btn-primary" : "btn-ghost btn-soft"
-              }`}
-              onClick={() => setActiveTab("currency")}
-            >
-              <Icon
-                icon="heroicons:currency-dollar-20-solid"
-                className="text-green-500"
-              />
-              ارز
-            </button>
-            <button
-              className={`btn btn-sm ${
-                activeTab === "crypto" ? "btn-primary" : "btn-ghost btn-soft"
-              }`}
-              onClick={() => setActiveTab("crypto")}
-            >
-              <Icon icon="ph:coin-fill" className="text-blue-500" />
-              ارز دیجیتال
-            </button>
-          </div>
-
-          {/* Items Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {filteredData().map((item) => (
-              <div
-                key={`${item.type}-${item.symbol}`}
-                className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+            <div className="navbar-end">
+              <div className="form-control mr-2">
+                <input
+                  type="text"
+                  placeholder="جستجو..."
+                  className="input input-bordered input-sm md:w-56 w-24"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              <button
+                className="btn btn-ghost btn-circle"
+                onClick={toggleDarkMode}
+                title={darkMode ? "حالت روشن" : "حالت تاریک"}
               >
-                <div className="card-body p-5">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className=" p-1
+                <Icon
+                  icon={darkMode ? "ph:sun-fill" : "ph:moon-fill"}
+                  className="text-xl"
+                />
+              </button>
+            </div>
+          </div>
+
+          {/* Market Stats Summary */}
+          <div className="container mx-auto px-4 py-5">
+            {/* Category Filter Pills - Mobile Only */}
+            <div className="flex overflow-x-auto gap-2 py-3 md:hidden">
+              <button
+                className={`btn btn-sm  ${
+                  activeTab === "all" ? "btn-primary" : "btn-ghost btn-soft"
+                }`}
+                onClick={() => setActiveTab("all")}
+              >
+                <Icon icon="mdi:view-dashboard" />
+                همه
+              </button>
+              <button
+                className={`btn btn-sm ${
+                  activeTab === "gold" ? "btn-primary" : "btn-ghost btn-soft"
+                }`}
+                onClick={() => setActiveTab("gold")}
+              >
+                <Icon icon="game-icons:gold-bar" className="text-yellow-500" />
+                طلا و سکه
+              </button>
+              <button
+                className={`btn btn-sm ${
+                  activeTab === "currency"
+                    ? "btn-primary"
+                    : "btn-ghost btn-soft"
+                }`}
+                onClick={() => setActiveTab("currency")}
+              >
+                <Icon
+                  icon="heroicons:currency-dollar-20-solid"
+                  className="text-green-500"
+                />
+                ارز
+              </button>
+              <button
+                className={`btn btn-sm ${
+                  activeTab === "crypto" ? "btn-primary" : "btn-ghost btn-soft"
+                }`}
+                onClick={() => setActiveTab("crypto")}
+              >
+                <Icon icon="ph:coin-fill" className="text-blue-500" />
+                ارز دیجیتال
+              </button>
+            </div>
+
+            {/* Items Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+              {filteredData().map((item) => (
+                <div
+                  key={`${item.type}-${item.symbol}`}
+                  className="card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group"
+                >
+                  <div className="card-body p-5">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className=" p-1
                       bg-base-300 rounded flex items-center justify-center gap-5"
-                    >
-                      <Icon icon={getItemIcon(item)} className="text-3xl" />
-                    </div>
-
-                    <div className="mr-4">
-                      <h2 className="card-title text-base font-bold">
-                        {item.name}
-                      </h2>
-                      <div className="flex items-center text-xs opacity-70">
-                        <span>{item.name_en}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="divider my-2"></div>
-
-                  <div>
-                    <div className="flex justify-between items-center mb-1">
-                      <span className="text-2xl font-bold">
-                        {formatPrice(item.price)}{" "}
-                        {item.change_value && (
-                          <span
-                            className={`mr-2 text-sm ${getChangeColor(
-                              item.change_percent
-                            )}`}
-                          >
-                            ({formatPrice(item.change_value)})
-                          </span>
-                        )}
-                      </span>
-                      <span className="text-sm font-bold opacity-80 badge badge-soft badge-accent">
-                        {item.unit}
-                      </span>
-                    </div>
-
-                    <div
-                      className={`flex flex-col-reverse  ${getChangeColor(
-                        item.change_percent
-                      )}`}
-                    >
-                      <span
-                        className={`badge badge-soft !w-fit  ${
-                          item.change_percent > 0
-                            ? "badge-success"
-                            : "badge-error"
-                        } font-medium flex`}
                       >
-                        %{item.change_percent}
-                        <Icon
-                          icon={getChangeIcon(item.change_percent)}
-                          className="text-xl mr-1"
-                        />
-                      </span>
+                        <Icon icon={getItemIcon(item)} className="text-3xl" />
+                      </div>
+
+                      <div className="mr-4">
+                        <h2 className="card-title text-base font-bold">
+                          {item.name}
+                        </h2>
+                        <div className="flex items-center text-xs opacity-70">
+                          <span>{item.name_en}</span>
+                        </div>
+                      </div>
                     </div>
 
-                    {item.market_cap && (
-                      <div className="badge badge-soft badge-info mt-2 text-xs ">
-                        <Icon
-                          icon="simple-icons:coinmarketcap"
-                          width="16"
-                          height="16"
-                        />{" "}
-                        ${formatPriceDollar(item.market_cap)}
-                      </div>
-                    )}
-                  </div>
+                    <div className="divider my-2"></div>
 
-                  <div className="mt-4 flex justify-between items-center text-xs">
-                    <div className="badge badge-primary badge-soft">
-                      {item.type === "gold"
-                        ? "طلا"
-                        : item.type === "currency"
-                        ? "ارز"
-                        : "کریپتو"}
-                    </div>
-                    <div className="flex gap-1">
-                      <div className="badge badge-soft">
-                        <Icon icon="ph:calendar" className="mr-1" />
-                        {item.date}
+                    <div>
+                      <div className="flex justify-between items-center mb-1">
+                        <span className="text-2xl font-bold">
+                          {formatPrice(item.price)}{" "}
+                          {item.change_value && (
+                            <span
+                              className={`mr-2 text-sm ${getChangeColor(
+                                item.change_percent
+                              )}`}
+                            >
+                              ({formatPrice(item.change_value)})
+                            </span>
+                          )}
+                        </span>
+                        <span className="text-sm font-bold opacity-80 badge badge-soft badge-accent">
+                          {item.unit}
+                        </span>
                       </div>
-                      {item.time && (
-                        <div className="badge badge-soft">
-                          <Icon icon="ph:clock" className="mr-1" />
-                          {item.time}
+
+                      <div
+                        className={`flex flex-col-reverse  ${getChangeColor(
+                          item.change_percent
+                        )}`}
+                      >
+                        <span
+                          className={`badge badge-soft !w-fit  ${
+                            item.change_percent > 0
+                              ? "badge-success"
+                              : "badge-error"
+                          } font-medium flex`}
+                        >
+                          %{item.change_percent}
+                          <Icon
+                            icon={getChangeIcon(item.change_percent)}
+                            className="text-xl mr-1"
+                          />
+                        </span>
+                      </div>
+
+                      {item.market_cap && (
+                        <div className="badge badge-soft badge-info mt-2 text-xs ">
+                          <Icon
+                            icon="simple-icons:coinmarketcap"
+                            width="16"
+                            height="16"
+                          />{" "}
+                          ${formatPriceDollar(item.market_cap)}
                         </div>
                       )}
                     </div>
+
+                    <div className="mt-4 flex justify-between items-center text-xs">
+                      <div className="badge badge-primary badge-soft">
+                        {item.type === "gold"
+                          ? "طلا"
+                          : item.type === "currency"
+                          ? "ارز"
+                          : "کریپتو"}
+                      </div>
+                      <div className="flex gap-1">
+                        <div className="badge badge-soft">
+                          <Icon icon="ph:calendar" className="mr-1" />
+                          {item.date}
+                        </div>
+                        {item.time && (
+                          <div className="badge badge-soft">
+                            <Icon icon="ph:clock" className="mr-1" />
+                            {item.time}
+                          </div>
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          {/* No Results Message */}
-          {filteredData().length === 0 && (
-            <div className="card bg-base-100 shadow-lg p-8 text-center my-8">
-              <Icon
-                icon="solar:document-search-broken"
-                className="text-8xl opacity-30 mx-auto"
-              />
-              <h3 className="mt-4 text-xl font-bold">نتیجه‌ای یافت نشد</h3>
-              <p className="mt-2 opacity-70">
-                لطفاً عبارت جستجوی خود را تغییر دهید یا دسته‌بندی دیگری را
-                انتخاب کنید
-              </p>
-              <button
-                className="btn btn-primary btn-sm mt-4"
-                onClick={() => {
-                  setSearchTerm("");
-                  setActiveTab("all");
-                }}
-              >
-                نمایش همه
-              </button>
+              ))}
             </div>
-          )}
 
-          <Footer />
+            {/* No Results Message */}
+            {filteredData().length === 0 && (
+              <div className="card bg-base-100 shadow-lg p-8 text-center my-8">
+                <Icon
+                  icon="solar:document-search-broken"
+                  className="text-8xl opacity-30 mx-auto"
+                />
+                <h3 className="mt-4 text-xl font-bold">نتیجه‌ای یافت نشد</h3>
+                <p className="mt-2 opacity-70">
+                  لطفاً عبارت جستجوی خود را تغییر دهید یا دسته‌بندی دیگری را
+                  انتخاب کنید
+                </p>
+                <button
+                  className="btn btn-primary btn-sm mt-4"
+                  onClick={() => {
+                    setSearchTerm("");
+                    setActiveTab("all");
+                  }}
+                >
+                  نمایش همه
+                </button>
+              </div>
+            )}
+
+            <Footer />
+          </div>
         </div>
+        <PWAInstallPrompt />
       </div>
-      <PWAInstallPrompt />
-    </div>
+    </SeoWrapper>
   );
 }
 

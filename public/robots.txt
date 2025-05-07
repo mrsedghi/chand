@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://chand-beta.vercel.app/sitemap.xml

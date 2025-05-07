@@ -83,12 +83,15 @@ const PWAInstallPrompt = () => {
 
               <p className="mt-1 text-gray-600 dark:text-gray-300">
                 {isIOSDevice
-                  ? "برای دسترسی سریع به اپلیکیشن روی دستگاه خانگی"
+                  ? "برای دسترسی سریع به اپلیکیشن روی موبایل"
                   : "For better experience, install the app on your device"}
               </p>
 
               {isIOSDevice && showInstructions && (
-                <div className="mt-3 bg-base-200 rounded-lg p-3 animate-fade-in">
+                <div
+                  className="mt-3 bg-base-200 rounded-lg p-3 animate-fade-in"
+                  dir="rtl"
+                >
                   <ol className="list-decimal list-inside space-y-2 text-sm text-gray-700 dark:text-gray-300">
                     <li>روی دکمه Share (اشتراک گذاری) در مرورگر کلیک کنید</li>
                     <li>گزینه "Add to Home Screen" را انتخاب کنید</li>
@@ -104,10 +107,7 @@ const PWAInstallPrompt = () => {
               )}
             </div>
 
-            <button
-              onClick={handleDismiss}
-              className="btn btn-ghost btn-sm btn-circle"
-            >
+            <button onClick={handleDismiss} className="btn btn-soft btn-ghost ">
               <Icon icon="mdi:close" className="text-lg" />
             </button>
           </div>
@@ -117,15 +117,12 @@ const PWAInstallPrompt = () => {
               <>
                 <button
                   onClick={toggleInstructions}
-                  className="btn btn-primary flex-1 gap-2"
+                  className="btn btn-soft btn-primary flex-1 gap-2"
                 >
                   <Icon icon="mdi:information" />
                   {showInstructions ? "بستن راهنما" : "نمایش راهنما"}
                 </button>
-                <button
-                  onClick={handleDismiss}
-                  className="btn btn-outline flex-1"
-                >
+                <button onClick={handleDismiss} className="btn btn-soft flex-1">
                   بعداً
                 </button>
               </>
@@ -133,15 +130,12 @@ const PWAInstallPrompt = () => {
               <>
                 <button
                   onClick={handleInstall}
-                  className="btn btn-primary flex-1 gap-2"
+                  className="btn btn-soft btn-primary flex-1 gap-2"
                 >
                   <Icon icon="mdi:download" />
                   نصب اپلیکیشن
                 </button>
-                <button
-                  onClick={handleDismiss}
-                  className="btn btn-outline flex-1"
-                >
+                <button onClick={handleDismiss} className="btn btn-soft flex-1">
                   شاید بعداً
                 </button>
               </>
